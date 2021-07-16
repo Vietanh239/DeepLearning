@@ -28,6 +28,8 @@ Chúng tôi sẽ sử dụng ngôn ngữ lập trình Python cho tất cả các
 
 Thư viện Keras được duy trì bởi François Chollet, một nhà nghiên cứu và kỹ sư học sâu tại Google. Tôi đã sử dụng Keras trong nhiều năm và có thể nói rằng đó là gói học sâu yêu thích của tôi. Là một thư viện mạng mô-đun, tối thiểu có thể sử dụng Theano hoặc TensorFlow làm phụ trợ, bạn không thể đánh bại Keras. Thư viện học sâu thứ hai mà chúng tôi sẽ sử dụng là mxnet (chỉ ImageNet Bundle), một thư viện học sâu nhẹ, di động và linh hoạt. Gói mxnet cung cấp các liên kết với ngôn ngữ lập trình Python và chuyên về học phân tán, đa máy - khả năng đào tạo song song trên các GPU
 
+[Xem tiếp chương 2](Chuong2/chuong2.md)
+
 ## 2. Deep Learning là gì
 
 Học sâu là một lĩnh vực con của học máy. Mục tiêu trọng tâm của AI là cung cấp một tập hợp các thuật toán và kỹ thuật có thể được sử dụng để giải quyết các vấn đề mà con người thực hiện một cách trực quan và gần như tự động, nhưng lại rất khó khăn đối với máy tính.
