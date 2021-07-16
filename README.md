@@ -1,8 +1,8 @@
-## Welcome to Deep Learning for CV
+# <center> Welcome to Computer Vision</center>
+ **<center>Trần Việt Anh - Hoàng Nguyên Phương</center>** 
+Cảm ơn các bạn đã xem qua github của chúng tôi. 
 
-You can use the [editor on GitHub](https://github.com/Vietanh239/DeepLearningForCV/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Chúng tôi hợp tác cùng nhau dịch cuốn sách Deep Learning for Computer Vision with Python của Dr. Adrian Rosebrock để tăng thêm kinh nghiệm trong lĩnh vực cũng như chia sẻ cho các bạn kinh nghiệm mà chúng tôi học được.
 
 ### Markdown
 
