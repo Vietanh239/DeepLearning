@@ -1,4 +1,4 @@
-## Welcome to GitHub Pages
+## Welcome to Deep Learning for CV
 
 You can use the [editor on GitHub](https://github.com/Vietanh239/DeepLearningForCV/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
 
