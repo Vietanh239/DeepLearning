@@ -27,3 +27,14 @@ Chúng ta sẽ bắt đầu với những kiến thức cơ bản về máy họ
 Chúng tôi sẽ sử dụng ngôn ngữ lập trình Python cho tất cả các ví dụ trong cuốn sách này. Python là một ngôn ngữ cực kỳ dễ học. Nó có cú pháp trực quan. Là siêu mạnh mẽ. Và đó là cách tốt nhất để làm việc với các thuật toán học sâu. Thư viện học sâu chính mà chúng tôi sẽ sử dụng là Keras.
 
 Thư viện Keras được duy trì bởi François Chollet, một nhà nghiên cứu và kỹ sư học sâu tại Google. Tôi đã sử dụng Keras trong nhiều năm và có thể nói rằng đó là gói học sâu yêu thích của tôi. Là một thư viện mạng mô-đun, tối thiểu có thể sử dụng Theano hoặc TensorFlow làm phụ trợ, bạn không thể đánh bại Keras. Thư viện học sâu thứ hai mà chúng tôi sẽ sử dụng là mxnet (chỉ ImageNet Bundle), một thư viện học sâu nhẹ, di động và linh hoạt. Gói mxnet cung cấp các liên kết với ngôn ngữ lập trình Python và chuyên về học phân tán, đa máy - khả năng đào tạo song song trên các GPU
+
+## 2. Deep Learning là gì
+
+Học sâu là một lĩnh vực con của học máy. Mục tiêu trọng tâm của AI là cung cấp một tập hợp các thuật toán và kỹ thuật có thể được sử dụng để giải quyết các vấn đề mà con người thực hiện một cách trực quan và gần như tự động, nhưng lại rất khó khăn đối với máy tính.
+
+![alt text](https://miro.medium.com/max/1400/1*hEB2c8gKxgjJtDBU_yrdPA.png "Hình 2.1: Một biểu đồ Venn mô tả học sâu như một trường con của máy học")
+<center><font size="-1">Hình 2.1: Một biểu đồ Venn mô tả DeepLearning là 1 trường con của Machine Learning</font></center>
+
+### 2.1 Lịch sử
+
+Lịch sử của mạng nơ-ron và học sâu là một lịch sử lâu dài, hơi khó hiểu. Có thể bạn sẽ ngạc nhiên khi biết rằng “học sâu” đã tồn tại từ những năm 1940 và trải qua nhiều lần thay đổi tên khác nhau, bao gồm điều khiển học, chủ nghĩa kết nối và Mạng thần kinh nhân tạo (ANN) quen thuộc nhất
