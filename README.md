@@ -38,3 +38,5 @@ Học sâu là một lĩnh vực con của học máy. Mục tiêu trọng tâm 
 ### 2.1 Lịch sử
 
 Lịch sử của mạng nơ-ron và học sâu là một lịch sử lâu dài, hơi khó hiểu. Có thể bạn sẽ ngạc nhiên khi biết rằng “học sâu” đã tồn tại từ những năm 1940 và trải qua nhiều lần thay đổi tên khác nhau, bao gồm điều khiển học, chủ nghĩa kết nối và Mạng thần kinh nhân tạo (ANN) quen thuộc nhất
+
+[Xem tiếp chương 2](Chuong2/chuong2.md)
