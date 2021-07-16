@@ -21,3 +21,9 @@ Cuốn sách này dành cho các nhà phát triển, nhà nghiên cứu và sinh
 
 Chúng ta sẽ bắt đầu với những kiến thức cơ bản về máy học và mạng nơ-ron. Bạn sẽ học một cách thú vị, thiết thực với nhiều dòng lệnh code. Chúng tôi cũng sẽ cung cấp cho bạn tài liệu tham khảo về các bài báo cụ thể trong tài liệu học máy mà bạn có thể sử dụng để mở rộng kiến thức của mình khi bạn cảm thấy mình có một nền tảng vững chắc để đứng vững.
  Bước quan trọng nhất bạn có thể thực hiện ngay bây giờ là bắt đầu đơn giản. Hãy để chúng tôi đảm nhận việc giảng dạy - bất kể trình độ kỹ năng của bạn như thế nào, hãy tin tưởng ở chúng tôi, bạn sẽ không bị bỏ lại phía sau. Khi bạn hoàn thành một vài chương đầu tiên của cuốn sách này, bạn sẽ là một ninja mạng thần kinh và có thể chuyển sang nội dung nâng cao hơn.
+
+### 1.4 Phạm vi sử dụng 
+
+Chúng tôi sẽ sử dụng ngôn ngữ lập trình Python cho tất cả các ví dụ trong cuốn sách này. Python là một ngôn ngữ cực kỳ dễ học. Nó có cú pháp trực quan. Là siêu mạnh mẽ. Và đó là cách tốt nhất để làm việc với các thuật toán học sâu. Thư viện học sâu chính mà chúng tôi sẽ sử dụng là Keras.
+
+Thư viện Keras được duy trì bởi François Chollet, một nhà nghiên cứu và kỹ sư học sâu tại Google. Tôi đã sử dụng Keras trong nhiều năm và có thể nói rằng đó là gói học sâu yêu thích của tôi. Là một thư viện mạng mô-đun, tối thiểu có thể sử dụng Theano hoặc TensorFlow làm phụ trợ, bạn không thể đánh bại Keras. Thư viện học sâu thứ hai mà chúng tôi sẽ sử dụng là mxnet (chỉ ImageNet Bundle), một thư viện học sâu nhẹ, di động và linh hoạt. Gói mxnet cung cấp các liên kết với ngôn ngữ lập trình Python và chuyên về học phân tán, đa máy - khả năng đào tạo song song trên các GPU
