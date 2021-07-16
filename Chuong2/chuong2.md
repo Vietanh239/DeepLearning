@@ -11,3 +11,7 @@ Học sâu là một lĩnh vực con của học máy. Mục tiêu trọng tâm 
 ### 2.1 Lịch sử
 
 Lịch sử của mạng nơ-ron và học sâu là một lịch sử lâu dài, hơi khó hiểu. Có thể bạn sẽ ngạc nhiên khi biết rằng “học sâu” đã tồn tại từ những năm 1940 và trải qua nhiều lần thay đổi tên khác nhau, bao gồm điều khiển học, chủ nghĩa kết nối và Mạng thần kinh nhân tạo (ANN) quen thuộc nhất
+
+Mặc dù được lấy cảm hứng từ bộ não con người và cách các tế bào thần kinh của nó tương tác với nhau. Chính điều này cho phép chúng ta vẽ ra những điểm tương đồng giữa một mô hình rất cơ bản của bộ não và cách chúng ta có thể bắt chước một số hành vi này thông qua các mạng thần kinh nhân tạo.
+
+Mô hình mạng nơ-ron đầu tiên đến từ McCulloch và Pitts vào năm 1943 . Mạng này là một bộ phân loại nhị phân, có khả năng nhận ra hai danh mục khác nhau dựa trên một số đầu vào. Vấn đề là các trọng số được sử dụng để xác định nhãn lớp cho một đầu vào nhất định cần được con người điều chỉnh theo cách thủ công - loại mô hình này rõ ràng không mở rộng quy mô tốt nếu người vận hành bắt buộc phải can thiệp.
