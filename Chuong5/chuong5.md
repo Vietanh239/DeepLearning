@@ -17,4 +17,21 @@ Bản thân MNIST bao gồm 60.000 hình ảnh đào tạo và 10.000 hình ản
 
 ### 5.2 Động vật: chó,mèo,gấu panda
 
+Mục đích của tập dữ liệu này là phân loại chính xác hình ảnh có chứa chó, mèo hoặc gấu trúc. Chỉ chứa 3.000 hình ảnh, tập dữ liệu Động vật có nghĩa là một tập dữ liệu “giới thiệu” khác mà chúng tôi có thể nhanh chóng đào tạo mô hình học sâu trên CPU hoặc GPU của mình và có được độ chính xác hợp lý. Trong Chương 10, chúng tôi sẽ sử dụng tập dữ liệu này để chứng minh cách sử dụng các pixel của hình ảnh làm vectơ đặc trưng không chuyển sang mô hình học máy chất lượng cao trừ khi chúng tôi sử dụng Mạng nơ-ron hợp pháp (CNN).
 
+### 5.3 Cifar10
+
+Cũng giống như MNIST, CIFAR-10 được coi là một bộ dữ liệu điểm chuẩn tiêu chuẩn khác để phân loại hình ảnh trong thị giác máy tính và tài liệu học máy. CIFAR-10 bao gồm 60.000 hình ảnh 32 × 32 × 3 (RGB) dẫn đến kích thước vectơ đặc trưng là 3072. Như tên cho thấy, CIFAR-10 bao gồm 10 lớp, bao gồm: máy bay, ô tô, chim, mèo, nai, chó , ếch, ngựa, tàu và xe tải.
+
+### 5.4 SMILES
+Tổng cộng, có 13.165 hình ảnh mức xám trong tập dữ liệu, với mỗi hình ảnh có kích thước 64 × 64.
+
+### 5.5 Kaggle: Dogs vs. Cats
+
+Tổng số 25.000 hình ảnh được cung cấp để đào tạo thuật toán của bạn với các độ phân giải hình ảnh khác nhau. Một mẫu của tập dữ liệu có thể được nhìn thấy trong Hình 5.5. Cách bạn quyết định xử lý trước hình ảnh của mình có thể dẫn đến các mức hiệu suất khác nhau, một lần nữa chứng minh rằng nền tảng về thị giác máy tính và kiến thức cơ bản về xử lý hình ảnh sẽ đi được một chặng đường dài khi nghiên cứu sâu.
+
+### 5.6 Flowers-17
+
+Tập dữ liệu Flowers-17 là tập dữ liệu 17 danh mục với 80 hình ảnh cho mỗi lớp được quản lý bởi Nilsback et al. Mục tiêu của tập dữ liệu này là dự đoán chính xác loài hoa cho một hình ảnh đầu vào nhất định. Một mẫu của bộ dữ liệu Flowers-17 có thể được nhìn thấy trong Hình 5.6. Flowers-17 có thể được coi là một tập dữ liệu đầy thách thức do những thay đổi đáng kể về tỷ lệ, góc nhìn, sự lộn xộn của hậu cảnh, các điều kiện ánh sáng khác nhau và sự thay đổi trong nội bộ lớp. Hơn nữa, chỉ với 80 hình ảnh cho mỗi lớp, sẽ trở thành thách thức đối với các mô hình học sâu để học cách đại diện cho mỗi lớp mà không cần trang bị quá nhiều.
+
+**Ngoài ra bạn có thể tham khảo ngay trên tài liệu của tác giả**
