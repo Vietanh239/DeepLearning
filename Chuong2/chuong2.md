@@ -5,8 +5,7 @@
 
 Học sâu là một lĩnh vực con của học máy. Mục tiêu trọng tâm của AI là cung cấp một tập hợp các thuật toán và kỹ thuật có thể được sử dụng để giải quyết các vấn đề mà con người thực hiện một cách trực quan và gần như tự động, nhưng lại rất khó khăn đối với máy tính.
 
-<center><img src="https://miro.medium.com/max/1400/
-1*hEB2c8gKxgjJtDBU_yrdPA.png" width="300"/></center>
+<center><img src="https://miro.medium.com/max/1400/1*hEB2c8gKxgjJtDBU_yrdPA.png" width="300"/></center>
 <center><font size="-1">Hình 2.1: Một biểu đồ Venn mô tả DeepLearning là 1 trường con của Machine Learning</font></center>
 
 ### 2.1 Lịch sử
