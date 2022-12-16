@@ -47,3 +47,4 @@ Chương này giải quyết câu hỏi phức tạp “Học sâu là gì?”. 
 
 **Nếu bạn cảm thấy hơi bối rối hoặc thậm chí bị choáng ngợp sau khi đọc chương này, đừng lo lắng - mục đích ở đây chỉ đơn giản là cung cấp một cái nhìn tổng quan cực kỳ cao về học sâu và chính xác nghĩa là “sâu”. Chương này cũng giới thiệu một số khái niệm và thuật ngữ mà bạn có thể không quen, bao gồm pixel, cạnh và góc - chương tiếp theo của chúng tôi sẽ đề cập đến các loại hình ảnh cơ bản này và cung cấp cho bạn một nền tảng cụ thể để đứng vững. Sau đó, chúng tôi sẽ bắt đầu chuyển sang các nguyên tắc cơ bản của mạng nơ-ron, cho phép chúng tôi chuyển sang học sâu và Mạng nơ-ron hợp pháp sau này trong cuốn sách này. Mặc dù chương này được thừa nhận là ở cấp độ cao, nhưng các chương còn lại của cuốn sách này sẽ rất thực tế, cho phép bạn thành thạo việc học sâu về các khái niệm thị giác máy tính.**
 
+[Xem tiếp chương 3](../Chuong3/chuong3.md)

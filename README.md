@@ -3,7 +3,7 @@
 
 Cảm ơn các bạn đã xem qua github của chúng tôi. 
 
-Chúng tôi hợp tác cùng nhau dịch cuốn sách Deep Learning for Computer Vision with Python của Dr. Adrian Rosebrock để tăng thêm kinh nghiệm trong lĩnh vực cũng như chia sẻ cho các bạn kinh nghiệm mà chúng tôi học được.
+Chúng tôi hợp tác cùng nhau dịch và tóm gọn cuốn sách Deep Learning for Computer Vision with Python của Dr. Adrian Rosebrock để tăng thêm kinh nghiệm trong lĩnh vực cũng như chia sẻ cho các bạn kinh nghiệm mà chúng tôi học được.
 
 ## 1. Lời mở đầu
 
