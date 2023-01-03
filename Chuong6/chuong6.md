@@ -24,4 +24,4 @@ Khi nói đến cấu hình môi trường phát triển học sâu của bạn,
 
 
 
-[Xem tiếp chương 6](Chuong7/chuong7.md)
+ [Xem tiếp chương 7](../Chuong7/chuong7.md)
