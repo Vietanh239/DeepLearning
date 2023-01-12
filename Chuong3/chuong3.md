@@ -65,7 +65,7 @@ Như đã đề cập trong Hình 3.1 trước đó trong chương này, một h
 Các thư viện xử lý hình ảnh như OpenCV và scikit-image biểu thị hình ảnh RGB dưới dạng mảng NumPy đa chiều có hình dạng (chiều cao, chiều rộng, chiều sâu). Những độc giả lần đầu tiên sử dụng các thư viện xử lý ảnh thường bị nhầm lẫn bởi biểu diễn này – tại sao chiều cao lại xuất hiện trước chiều rộng khi chúng ta thường nghĩ về một hình ảnh theo chiều rộng trước rồi đến chiều cao? Câu trả lời là do ký hiệu ma trận.
 
 Khi xác định kích thước của ma trận, chúng tôi luôn viết nó dưới dạng hàng x cột. Số hàng trong ảnh là chiều cao của ảnh trong khi số cột là chiều rộng của ảnh. Độ sâu sẽ vẫn là độ sâu. Do đó, mặc dù có thể hơi khó hiểu khi xem .shape của một mảng NumPy được biểu thị dưới dạng (chiều cao, chiều rộng, chiều sâu), nhưng biểu diễn này thực sự có ý nghĩa trực quan khi xem xét cách ma trận được xây dựng và chú thích. Ví dụ: hãy xem thư viện OpenCV và hàm cv2.imread được sử dụng để tải hình ảnh từ disk và hiển thị kích thước của nó:
-```python line-numbers
+```python 
 import cv2
 image = cv2.imread("example.png")
 print(image.shape)

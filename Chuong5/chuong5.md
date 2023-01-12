@@ -38,4 +38,4 @@ Như tên cho thấy, tập dữ liệu SMILES bao gồm hình ảnh của các 
 
 **Ngoài ra bạn có thể tham khảo thêm các bộ dữ liệu hoa, xe, và nhiều bộ dữ liệu khác của tác giả, thậm chí trên mạng. Chúng tôi kể tên tiêu biểu của các bộ dữ liệu**
 
-[Xem tiếp chương 6](Chuong6/chuong6.md)
+ [Xem tiếp chương 6](../Chuong6/chuong6.md)

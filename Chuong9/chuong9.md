@@ -230,3 +230,181 @@ Xem lại thuật toán vanilla gradient descent, rõ ràng là (phần nào) ph
 
 Sự khác biệt duy nhất giữa vanilla gradient descent và SGD là việc bổ sung chức năng next_training_batch. Thay vì tính toán độ dốc của chúng tôi trên toàn bộ tập dữ liệu, thay vào đó, chúng tôi lấy mẫu dữ liệu của mình, thu được một batch. húng tôi đánh giá độ dốc trên lô và cập nhật ma trận trọng số W. Từ góc độ triển khai, chúng tôi cũng cố gắng ngẫu nhiên hóa các mẫu đào tạo của mình trước khi áp dụng SGD vì thuật toán nhạy cảm với các lô. Sau khi xem code cho SGD, bạn sẽ nhận thấy ngay phần giới thiệu về một tham số mới: batch-size. hi triển khai SGD “thuần túy”, mini-batches size của bạn sẽ là 1, ngụ ý rằng chúng tôi sẽ lấy mẫu ngẫu nhiên một điểm dữ liệu từ tập huấn luyện, tính toán gradient và cập nhật các tham số của chúng tôi. Tuy nhiên, chúng tôi thường sử dụng mini-batches> 1. Batchsize điển hình bao gồm 32, 64, 128 và 256.
 Để bắt đầu, batchsize > 1 giúp giảm phương sai trong cập nhật tham số, dẫn đến sự hội tụ ổn định hơn. Thứ hai, lũy thừa của hai thường được mong muốn đối với các batchsize vì chúng cho phép các thư viện tối ưu hóa đại số tuyến tính bên trong hoạt động hiệu quả hơn.
+
+#### 9.2.1 Triển khai SGD
+```python
+1 # import the necessary packages
+2 from sklearn.model_selection import train_test_split
+3 from sklearn.metrics import classification_report
+4 from sklearn.datasets import make_blobs
+5 import matplotlib.pyplot as plt
+6 import numpy as np
+7 import argparse
+8
+9 def sigmoid_activation(x):
+10  # compute the sigmoid activation value for a given input
+11  return 1.0 / (1 + np.exp(-x))
+13 def predict(X, W):
+14  # take the dot product between our features and weight matrix
+15  preds = sigmoid_activation(X.dot(W))
+16
+17  # apply a step function to threshold the outputs to binary
+18  # class labels
+19  preds[preds <= 0.5] = 0
+20  preds[preds > 0] = 1
+21
+22  # return the predictions
+23  return preds
+
+```
+Từ 1-> 23 đều giống file gradient descent trước. Tiếp theo là next_batch: 
+```python
+25 def next_batch(X, y, batchSize):
+26   # loop over our dataset ‘X‘ in mini-batches, yielding a tuple of
+27   # the current batched data and labels
+28   for i in np.arange(0, X.shape[0], batchSize):
+29      yield (X[i:i + batchSize], y[i:i + batchSize])
+
+```
+Phương thức next_batch yêu cầu ba tham số:
+1. X: Tập dữ liệu đào tạo của chúng tôi về vectơ đặc trưng/cường độ pixel ảnh thô.
+2. y: Các nhãn lớp được liên kết với từng điểm dữ liệu huấn luyện.
+3. batchSize: Kích thước của mỗi mini-batch sẽ được trả lại.
+Các dòng 28 và 29 sau đó lặp lại các ví dụ huấn luyện, tạo ra các tập con của cả X và y dưới dạng các mini-batches.
+
+Blockcode tiếp theo của chúng tôi xử lý việc tạo ra vấn đề phân loại 2 lớp với 1.000 điểm dữ liệu, thêm cột thiên vị, sau đó thực hiện phân tách đào tạo và kiểm tra:
+```python
+41 # generate a 2-class classification problem with 1,000 data points,
+42 # where each data point is a 2D feature vector
+43 (X, y) = make_blobs(n_samples=1000, n_features=2, centers=2,
+44 cluster_std=1.5, random_state=1)
+45 y = y.reshape((y.shape[0], 1))
+46
+47 # insert a column of 1’s as the last entry in the feature
+48 # matrix -- this little trick allows us to treat the bias
+49 # as a trainable parameter within the weight matrix
+50 X = np.c_[X, np.ones((X.shape[0]))]
+51
+52 # partition the data into training and testing splits using 50% of
+53 # the data for training and the remaining 50% for testing
+54 (trainX, testX, trainY, testY) = train_test_split(X, y,
+55 test_size=0.5, random_state=42)
+56
+57 # initialize our weight matrix and list of losses
+58 print("[INFO] training...")
+59 W = np.random.randn(X.shape[1], 1)
+60 losses = []
+```
+Tiếp theo đưa mini-batches vào từng epochs: 
+```python
+62 # loop over the desired number of epochs
+63 for epoch in np.arange(0, args["epochs"]):
+64 # initialize the total loss for the epoch
+65 epochLoss = []
+66
+67   # loop over our data in batches
+68   for (batchX, batchY) in next_batch(X, y, args["batch_size"]):
+69     # take the dot product between our current batch of features
+70     # and the weight matrix, then pass this value through our
+71     # activation function
+72     preds = sigmoid_activation(batchX.dot(W))
+73
+74     # now that we have our predictions, we need to determine the
+75     # ‘error‘, which is the difference between our predictions
+76     # and the true values
+77     error = preds - batchY
+78     epochLoss.append(np.sum(error ** 2))
+80     # the gradient descent update is the dot product between our
+81     # current batch and the error on the batch
+82     gradient = batchX.T.dot(error)
+83
+84     # in the update stage, all we need to do is "nudge" the
+85     # weight matrix in the negative direction of the gradient
+86     # (hence the term "gradient descent") by taking a small step
+87     # towards a set of "more optimal" parameters
+88     W += -args["alpha"] * gradient
+```
+Dòng 88 xử lý việc cập nhật ma trận trọng số của chúng tôi dựa trên gradient descent, được chia tỷ lệ theo learning rate của chúng tôi --alpha. ưu ý cách giai đoạn cập nhật trọng số diễn ra bên trong batch loop – điều này có nghĩa là có nhiều cập nhật trọng số cho mỗi epoch. Sau đó, chúng tôi có thể cập nhật lịch sử tổn thất của mình bằng cách lấy giá trị trung bình trên tất cả các đợt trong kỷ nguyên và sau đó hiển thị bản cập nhật cho terminal của chúng tôi nếu cần:
+```python
+
+90  # update our loss history by taking the average loss across all
+91  # batches
+92  loss = np.average(epochLoss)
+93  losses.append(loss)
+94
+95  # check to see if an update should be displayed
+96  if epoch == 0 or (epoch + 1) % 5 == 0:
+97    print("[INFO] epoch={}, loss={:.7f}".format(int(epoch + 1),loss))
+98
+99
+100 # evaluate our model
+101 print("[INFO] evaluating...")
+102 preds = predict(testX, W)
+103 print(classification_report(testY, preds))
+104
+105 # plot the (testing) classification data
+106 plt.style.use("ggplot")
+107 plt.figure()
+108 plt.title("Data")
+109 plt.scatter(testX[:, 0], testX[:, 1], marker="o", c=testY, s=30)
+110
+111 # construct a figure that plots the loss over time
+112 plt.style.use("ggplot")
+113 plt.figure()
+114 plt.plot(np.arange(0, args["epochs"]), losses)
+115 plt.title("Training Loss")
+116 plt.xlabel("Epoch #")
+117 plt.ylabel("Loss")
+118 plt.show()
+
+```
+Chúng ta sẽ sử dụng tập dữ liệu “blob” giống như ở trên để phân loại, nhờ đó chúng ta có thể so sánh kết quả SGD của mình với kết quả vanilla gradient descent. Hơn nữa, ví dụ SGD sử dụng cùng tốc độ học tập (0,1) và cùng số lượng kỷ nguyên (100) như giảm dần độ dốc vani. Tuy nhiên, hãy lưu ý rằng đường cong tổn thất của chúng ta mượt mà hơn như thế nào trong Hình 9.4.
+<center><img src="sgd.png"/></center>
+<center><font size="-1">Hình 9.4: Áp dụng Stochastic Gradient Descent mượt hơn </font></center>
+
+Điều tra các giá trị tổn thất thực tế vào epoch thứ 100, bạn sẽ nhận thấy rằng tổn thất mà SGD thu được thấp hơn một bậc so với vanilla gradient descent(tương ứng là 0,003 so với 0,021). Sự khác biệt này là do có nhiều lần cập nhật trọng số trên mỗi epoch, giúp mô hình của chúng tôi có nhiều cơ hội hơn để học hỏi từ các bản cập nhật được thực hiện cho ma trận trọng số. Hiệu ứng này thậm chí còn rõ rệt hơn trên các bộ dữ liệu lớn, chẳng hạn như ImageNet nơi chúng tôi có hàng triệu ví dụ đào tạo và các cập nhật nhỏ, gia tăng trong các tham số của chúng tôi có thể dẫn đến giải pháp tổn thất thấp (nhưng không nhất thiết phải tối ưu).
+
+### 9.3 Mở rộng SGD
+
+Có hai phần mở rộng chính mà bạn sẽ gặp đối với SGD trong thực tế. Đầu tiên là momentum , một phương pháp được sử dụng để tăng tốc SGD, cho phép nó học nhanh hơn bằng cách tập trung vào các  chiều có gradient point theo cùng một hướng. Phương pháp thứ hai là gia tốc Nesterov, một phần mở rộng của momentum tiêu chuẩn.
+
+#### 9.3.1 Mementum
+
+Hãy nghĩ đến sân chơi thời thơ ấu yêu thích của bạn, nơi bạn đã trải qua nhiều ngày lăn xuống một ngọn đồi, phủ đầy cỏ và đất. Khi bạn đi xuống đồi, bạn ngày càng tạo ra nhiều động lượng hơn, do đó sẽ đưa bạn xuống đồi nhanh hơn.
+Động lượng áp dụng cho SGD có tác dụng tương tự – mục tiêu của chúng tôi là xây dựng dựa trên bản cập nhật trọng lượng tiêu chuẩn để bao gồm một thuật ngữ động lượng, do đó cho phép mô hình của chúng tôi đạt được tổn thất thấp hơn (và độ chính xác cao hơn) trong ít thời gian hơn. Do đó, thuật ngữ động lượng sẽ tăng cường độ cập nhật cho các epoch có điểm gradient theo cùng một hướng và sau đó giảm cường độ cập nhật cho các chiều có gradients  chuyển hướng
+
+Quy tắc cập nhật trọng số trước đây của chúng tôi chỉ đơn giản bao gồm phụ thuộc thay đổi gradient và learning rate của chúng tôi:
+<center><img src="normal_update.png"/></center>
+Bây giờ có động lượng V được scale theo γ: 
+<center><img src="moment.png"/></center>
+
+Thuật ngữ động lượng γ thường được đặt thành 0,9; mặc dù một thực tế phổ biến khác là đặt γ thành 0,5 cho đến khi quá trình học ổn định rồi tăng lên 0,9 – cực kỳ hiếm khi thấy động lượng < 0,5. Để xem xét chi tiết hơn về động lượng, vui lòng tham khảo Sutton và Qian
+
+#### 9.3.2 Gia tốc Nesterov
+
+Giả sử rằng bạn quay trở lại sân chơi thời thơ ấu của mình, lăn xuống ngọn đồi. Bạn đã tạo đà và đang di chuyển khá nhanh – nhưng có một vấn đề. Ở dưới chân đồi là bức tường gạch của trường học của bạn, ngôi trường mà bạn muốn tránh đánh ở tốc độ tối đa.
+
+Suy nghĩ tương tự cũng có thể được áp dụng cho SGD. Nếu chúng ta tạo ra quá nhiều động lượng, chúng ta có thể vượt quá mức tối thiểu cục bộ và tiếp tục lăn. Do đó, sẽ có lợi nếu có một lần lăn thông minh hơn, một loại biết khi nào nên giảm tốc độ, đó là nơi gradient tăng tốc Nesterov xuất hiện.
+Gia tốc Nesterov có thể được khái niệm hóa như một bản cập nhật điều chỉnh động lượng cho phép chúng ta có được ý tưởng gần đúng về vị trí của các tham số sau khi cập nhật. trực quan đẹp về gia tốc Nesterov (Hình 9.5).
+
+<center><img src="giatoc.png"/></center>
+<center><font size="-1">Hình 9.5: Mô tả bằng đồ thị về gia tốc Nesterov Đầu tiên, chúng tôi thực hiện một bước nhảy lớn theo hướng của độ gradient trước đó, sau đó đo gradient nơi chúng tôi kết thúc và thực hiện hiệu chỉnh. </font></center>
+Sử dụng động lượng tiêu chuẩn, chúng tôi tính toán gradient (vectơ nhỏ màu xanh lam) và sau đó thực hiện một bước nhảy lớn theo hướng của độ dốc (vectơ lớn màu xanh lam). Dưới khả năng tăng tốc của Nesterov, trước tiên, chúng tôi sẽ thực hiện một bước nhảy lớn theo hướng của độ dốc trước đó (vectơ màu nâu), đo độ dốc và sau đó thực hiện hiệu chỉnh (vectơ màu đỏ) – vectơ màu xanh lá cây là bản cập nhật được sửa lỗi cuối cùng bằng khả năng tăng tốc của Nesterov
+Việc xử lý thấu đáo về lý thuyết và toán học đối với gia tốc Nesterov nằm ngoài phạm vi của cuốn sách này. Đối với những người muốn nghiên cứu gia tốc Nesterov chi tiết hơn, vui lòng tham khảo Ruder
+
+#### 9.3.3 Anecdotal Recommendations
+
+Kinh nghiệm cá nhân của tôi đã khiến tôi nhận thấy rằng khi đào tạo các mạng sâu trên các bộ dữ liệu lớn, SGD sẽ dễ làm việc hơn khi sử dụng động lượng và loại bỏ gia tốc Nesterov. Mặt khác, các bộ dữ liệu nhỏ hơn có xu hướng tận hưởng những lợi ích của việc tăng tốc Nesterov.
+
+### 9.4 Regularization
+
+Làm cách nào để chúng ta chọn một tập hợp các tham số giúp đảm bảo mô hình của chúng ta khái quát hóa tốt? Hoặc, ít nhất, làm giảm tác động của việc overfitting. Câu trả lời là chính quy hóa (Regularization). Chỉ đứng sau learning rate của bạn, chính quy hóa là thông số quan trọng nhất của mô hình mà bạn có thể điều chỉnh. Có nhiều loại kỹ thuật chuẩn hóa khác nhau, chẳng hạn như chuẩn hóa L1, chuẩn hóa L2 (thường được gọi là “phân rã trọng số” weight decay) và Elastic Net được sử dụng bằng cách cập nhật chính hàm loss function, thêm một tham số bổ sung để hạn chế khả năng của model. húng tôi cũng có các loại chính quy hóa có thể được thêm một cách rõ ràng vào kiến trúc mạng – dropout là ví dụ điển hình của quy chuẩn hóa đó. Sau đó, chúng tôi có các hình thức chính quy hóa tiềm ẩn được áp dụng trong quá trình đào tạo. Ví dụ về chính quy ngầm bao gồm tăng cường dữ liệu và dừng sớm. Trong phần này, chúng ta sẽ chủ yếu tập trung vào việc chính quy hóa được tham số hóa thu được bằng cách sửa đổi các hàm mất mát và cập nhật của chúng ta
+
+Chính quy hóa giúp chúng tôi kiểm soát dung lượng mô hình của mình, đảm bảo rằng các mô hình của chúng tôi thực hiện phân loại (chính xác) tốt hơn trên các điểm dữ liệu mà chúng không được đào tạo, cái mà chúng tôi gọi là khả năng khái quát hóa. Nếu chúng tôi không áp dụng chính quy hóa, các trình phân loại của chúng tôi có thể dễ dàng trở nên quá phức tạp và quá khớp với dữ liệu đào tạo của chúng tôi, trong trường hợp đó, chúng tôi sẽ mất khả năng khái quát hóa dữ liệu thử nghiệm của mình (và cả các điểm dữ liệu bên ngoài bộ thử nghiệm, chẳng hạn như hình ảnh mới trong thế giới hoang dã).
+Tuy nhiên, quá nhiều chính quy hóa có thể là một điều xấu. Chúng ta có thể gặp rủi ro về underfitting, , trong trường hợp đó, mô hình của chúng ta hoạt động kém trên dữ liệu huấn luyện và không thể mô hình hóa mối quan hệ giữa dữ liệu đầu vào và nhãn lớp đầu ra (vì chúng ta đã giới hạn dung lượng mô hình quá nhiều) Ví dụ, hãy xem xét đồ thị các điểm sau đây, cùng với các chức năng khác nhau phù hợp với các điểm này (Hình 9.6).
+<center><img src="cqh.png"/></center>
+<center><font size="-1">Hình 9.6: Một ví dụ về underfit(đường màu cam), overfit (đường màu xanh lam) và tổng quát hóa (đường màu xanh lá cây). Mục tiêu của chúng tôi khi xây dựng các bộ phân loại học sâu là thu được các loại “hàm green" này phù hợp với dữ liệu đào tạo của chúng tôi một cách độc đáo, nhưng tránh overfiting. Chính quy hóa có thể giúp chúng tôi có được loại phù hợp mong muốn này. </font></center>
+
+Để hiểu quy tắc hóa và tác động của nó đối với loss function và quy tắc cập nhật trọng lượng của chúng tôi, hãy chuyển sang phần tiếp theo.
+
+#### 9.4.2 Cập nhật loss function và trọng số W để bao gồm chính quy hóa
